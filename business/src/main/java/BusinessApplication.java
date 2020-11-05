@@ -23,7 +23,7 @@ public class BusinessApplication {
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(BusinessApplication.class);
         Environment environment = springApplication.run(args).getEnvironment();
-        LOGGER.info("启动成功 !!!");
+        LOGGER.info("启动成功 !!!!!");
         LOGGER.info("business地址\t http://127.0.0.1:{}", environment.getProperty("server.port"));
     }
 }
