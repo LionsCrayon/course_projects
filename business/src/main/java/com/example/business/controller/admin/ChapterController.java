@@ -35,6 +35,7 @@ public class ChapterController {
     @PostMapping("/list")
     public ResponseDto list(@RequestBody ChapterPageDto pageDTO) {
         ResponseDto responseDto = new ResponseDto();
+        ValidatorUtil.require(pageDTO.getCourseId(), "课程ID");
         testBusiness.selectAll(pageDTO);
         responseDto.setContent(pageDTO);
         return responseDto;

@@ -6,6 +6,7 @@ import com.example.server.DTO.PageDTO;
 import com.example.server.domain.Course;
 import com.example.server.domain.CourseExample;
 import com.example.server.mapper.CourseMapper;
+import com.example.server.mapper.my.MyCourseMapper;
 import com.example.server.util.CopyUtil;
 import com.example.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
@@ -28,6 +29,9 @@ public class CourseService {
 
     @Autowired
     private CourseMapper courseMapper;
+
+    @Autowired
+    private MyCourseMapper myCourseMapper;
 
     /**
      * 业务层查询操作
@@ -85,5 +89,14 @@ public class CourseService {
      */
     public void delete(String id){
         courseMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 更新课时时长
+     *
+     */
+
+    public void updateTime(String courseId){
+        myCourseMapper.updateTime(courseId);
     }
 }

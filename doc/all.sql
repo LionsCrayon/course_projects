@@ -74,3 +74,35 @@ INSERT INTO `course`.`course` (`id`,`name`,`summary`,`time`,`price`,`image`,`lev
 VALUES
 ('00001','测试课程1','这是一门测试课',7200,9.9,'','0','C','D','100','0',now(),now());
 
+
+/* 分类*/
+drop table if exists `category`;
+create table `category`(
+    `id` char(8) not null default '' comment 'id',
+    `parent` char(8) not null default '' comment '父id',
+    `name` varchar(50) not null comment '名称',
+    `sort` int comment '顺序',
+    primary key (`id`)
+)engine=innodb default charset=utf8mb4 comment '分类';
+
+
+
+insert into `category` (id, parent, name, sort) values ('0000100','0000000','前端技术',100);
+insert into `category` (id, parent, name, sort) values ('0000101','0000100','HTML/CSS',101);
+insert into `category` (id, parent, name, sort) values ('0000102','0000100','JavaScript',102);
+insert into `category` (id, parent, name, sort) values ('0000103','0000100','Vue.js',103);
+insert into `category` (id, parent, name, sort) values ('0000104','0000100','React.JS',104);
+insert into `category` (id, parent, name, sort) values ('0000105','0000100','Angular',105);
+insert into `category` (id, parent, name, sort) values ('0000106','0000100','Node.js',106);
+insert into `category` (id, parent, name, sort) values ('0000107','0000100','jQuery',107);
+insert into `category` (id, parent, name, sort) values ('0000108','0000100','Bootstrap',108);
+
+insert into `category` (id, parent, name, sort) values ('0000200','0000000','后端技术',200);
+insert into `category` (id, parent, name, sort) values ('0000201','0000200','Java',201);
+insert into `category` (id, parent, name, sort) values ('0000202','0000200','SpringBoot',202);
+insert into `category` (id, parent, name, sort) values ('0000203','0000200','Spring Cloud',203);
+insert into `category` (id, parent, name, sort) values ('0000204','0000200','SSM',204);
+insert into `category` (id, parent, name, sort) values ('0000205','0000200','PHP',205);
+insert into `category` (id, parent, name, sort) values ('0000206','0000200','Python',206);
+insert into `category` (id, parent, name, sort) values ('0000207','0000200','Django',207);
+insert into `category` (id, parent, name, sort) values ('0000208','0000200','Tornado',208);

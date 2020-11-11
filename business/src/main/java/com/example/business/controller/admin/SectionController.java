@@ -35,6 +35,8 @@ public class SectionController {
     @PostMapping("/list")
     public ResponseDto list(@RequestBody SectionPageDto pageDTO) {
         ResponseDto responseDto = new ResponseDto();
+        ValidatorUtil.require(pageDTO.getChapterId(), "大章ID");
+        ValidatorUtil.require(pageDTO.getCourseId(), "课程ID");
         sectionService.selectAll(pageDTO);
         responseDto.setContent(pageDTO);
         return responseDto;

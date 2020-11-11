@@ -1,7 +1,7 @@
 package com.example.server.service;
 
 import com.example.server.DTO.${Domain}DTO;
-import com.example.server.DTO.${Domain}PageDto;
+import com.example.server.DTO.${Domain}PageDTO;
 import com.example.server.DTO.PageDTO;
 import com.example.server.domain.${Domain};
 import com.example.server.domain.${Domain}Example;
@@ -37,7 +37,7 @@ public class ${Domain}Service {
      * 业务层查询操作
      * @param pageDTO
      */
-    public void selectAll(${Domain}PageDto pageDTO){
+    public void selectAll(${Domain}PageDTO pageDTO){
         PageHelper.startPage(pageDTO.getPage(),pageDTO.getSize());
         ${Domain}Example ${domain}Example = new ${Domain}Example();
          <#list fieldList as field>

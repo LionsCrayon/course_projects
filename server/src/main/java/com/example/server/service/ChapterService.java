@@ -36,6 +36,10 @@ public class ChapterService {
     public void selectAll(ChapterPageDto pageDTO){
         PageHelper.startPage(pageDTO.getPage(),pageDTO.getSize());
         ChapterExample testExample = new ChapterExample();
+        ChapterExample.Criteria criteria = testExample.createCriteria();
+        if (!StringUtils.isEmpty(pageDTO.getCourseId())){
+            criteria.andCourseIdEqualTo(pageDTO.getCourseId());
+        }
         List<Chapter> chapterList = testMapper.selectByExample(testExample);
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapterList);
         pageDTO.setTotal(pageInfo.getTotal());

@@ -1,7 +1,6 @@
 package com.example.business.controller;
 
 import com.example.server.DTO.ResponseDto;
-import com.example.server.exception.BusinessException;
 import com.example.server.exception.ValidatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

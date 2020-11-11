@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public class SectionService {
     @Autowired
     private SectionMapper sectionMapper;
 
+    @Autowired
+    private CourseService courseService;
     /**
      * 业务层查询操作
      * @param pageDTO
@@ -36,7 +39,13 @@ public class SectionService {
     public void selectAll(SectionPageDto pageDTO){
         PageHelper.startPage(pageDTO.getPage(),pageDTO.getSize());
         SectionExample sectionExample = new SectionExample();
-        sectionExample.setOrderByClause("sort asc");
+        SectionExample.Criteria criteria = sectionExample.createCriteria();
+        if (!StringUtils.isEmpty(pageDTO.getChapterId())){
+            criteria.andChapterIdEqualTo(pageDTO.getChapterId());
+        }
+        if (!StringUtils.isEmpty(pageDTO.getCourseId())){
+            criteria.andCourseIdEqualTo(pageDTO.getCourseId());
+        }
         List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
         PageInfo<Section> pageInfo = new PageInfo<>(sectionList);
         pageDTO.setTotal(pageInfo.getTotal());
@@ -48,6 +57,7 @@ public class SectionService {
      * 保存操作，包含新增和修改
      * @param sectionDTO
      */
+    @Transactional(rollbackFor = Exception.class)
     public void save(SectionDTO sectionDTO){
         Section section = CopyUtil.copy(sectionDTO, Section.class);
         if (StringUtils.isEmpty(section.getId())){
@@ -56,6 +66,7 @@ public class SectionService {
         else{
             update(section);
         }
+        courseService.updateTime(sectionDTO.getCourseId());
     }
 
     /**
